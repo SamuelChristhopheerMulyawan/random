@@ -1,0 +1,473 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<?php
+session_start();
+
+if(!isset($_SESSION['username'])){
+  header("Location: /tugasrev/isi/login/index.php");
+  exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Black Dashboard by Creative Tim
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="../assets/demo/demo.css" rel="stylesheet" />
+
+  <style type="text/css">
+    * {
+      font-family: "Trebuchet MS";
+    }
+
+    .tambah h1 {
+      text-transform: uppercase;
+      color: #e83e8c;
+    }
+
+    .tambah button {
+      background-color: #e83e8c;
+      color: #fff;
+      padding: 10px;
+      text-decoration: none;
+      font-size: 12px;
+      border: 0px;
+      margin-top: 1rem;
+    }
+
+    .tambah label {
+      margin-top: 10px;
+      float: left;
+      text-align: left;
+      width: 100%;
+    }
+
+    .tambah input {
+      padding: 6px;
+      width: 100%;
+      box-sizing: border-box;
+      background: #f8f8f8;
+      border: 2px solid #ccc;
+      outline-color: #e83e8c;
+    }
+
+    .tambah div {
+      width: 100%;
+      height: auto;
+    }
+
+    .base {
+      width: 400px;
+      height: auto;
+      padding: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #ededed;
+      border-radius: 10px;
+    }
+
+    .tambah {
+      margin-top: 1rem;
+
+    }
+
+    .submit {
+      margin-top: 2rem;
+      border-radius: 10px;
+    }
+
+    .qw {
+      border: none;
+      display: flex;
+    }
+
+    .genre {
+      float: left;
+    }
+
+
+  </style>
+</head>
+
+<body class="">
+  <div class="wrapper">
+    <div class="sidebar">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+    -->
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="javascript:void(0)" class="simple-text logo-mini">
+            <i class="tim-icons icon-atom"></i>
+          </a>
+          <a href="javascript:void(0)" class="simple-text logo-normal">
+            Menu
+          </a>
+        </div>
+        <ul class="nav">
+          <li>
+            <a href="./dashboard.php">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href="./buku_tamu.php">
+              <i class="tim-icons icon-book-bookmark"></i>
+              <p>Buku Tamu</p>
+            </a>
+          </li>
+          <li class="active ">
+            <a href="./create.php">
+              <i class="tim-icons icon-upload"></i>
+              <p>Create</p>
+            </a>
+          </li>
+          <li>
+            <a href="./update.php">
+              <i class="tim-icons icon-cloud-upload-94"></i>
+              <p>Update</p>
+            </a>
+          </li>
+          <li>
+            <a href="./delete.php">
+              <i class="tim-icons icon-trash-simple"></i>
+              <p>Delete</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle d-inline">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="javascript:void(0)">Create</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto">
+              <li class="search-bar input-group">
+                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i
+                    class="tim-icons icon-zoom-split"></i>
+                  <span class="d-lg-none d-md-block">Search</span>
+                </button>
+              </li>
+              <!-- <li class="dropdown nav-item">
+                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="notification d-none d-lg-block d-xl-block"></div>
+                  <i class="tim-icons icon-sound-wave"></i>
+                  <p class="d-lg-none">
+                    Notifications
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                  <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to your email</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Your friend Michael is in town</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a></li>
+                </ul>
+              </li>
+              <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="photo">
+                    <img src="../assets/img/anime3.png" alt="Profile Photo">
+                  </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-navbar">
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                </ul>
+              </li> -->
+              <li class="separator d-lg-none"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Navbar -->
+      <div class="tambah">
+        <center>
+          <h1>Tambah Film</h1>
+          <center>
+            <form method="POST" action="" enctype="multipart/form-data">
+              <section class="base">
+                <div>
+                  <label>Title</label>
+                  <input type="text" name="title-f" autofocus="" required="" />
+                </div>
+                <div>
+                  <label>Genre</label>
+                  <select id="cars" name ="genre" class="genre">
+                    <option value="Action">Action</option>
+                    <option value="Animation">Animation</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Romace">Romace</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Science">Science</option>
+                    <option value="Fiction">Fiction</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Tahun Rilis</label>
+                  <input type="date" name="tahun" />
+                </div>
+                <div>
+                  <label>Jenis Film</label>
+                  <div class="qw">
+                    <input type="radio" id="html" name="jenisf" value="Series">
+                    <label for="html">Series</label><br>
+                    <input type="radio" id="css" name="jenisf" value="Movie">
+                    <label for="css">Movie</label><br>
+                  </div>
+                </div>
+                <div>
+                  <label>Deskripsi</label>
+                  <input type="text" name="ringkasan" required="" />
+                </div>
+                <div>
+                  <label>Gambar Produk</label>
+                  <input type="file" name="gambarfilm" required="" />
+                </div>
+                <div>
+                  <button type="submit" class="submit" name="simpan">Simpan Film</button>
+                </div>
+              </section>
+            </form>
+      </div> <!-- container// -->
+
+
+
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chart JS -->
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/black-dashboard.min.js?v=1.0.0"></script>
+  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+  <script src="../assets/demo/demo.js"></script>
+  <script>
+    $(document).ready(function () {
+      $().ready(function () {
+        $sidebar = $('.sidebar');
+        $navbar = $('.navbar');
+        $main_panel = $('.main-panel');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+        sidebar_mini_active = true;
+        white_color = false;
+
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+
+        $('.fixed-plugin a').click(function (event) {
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .background-color span').click(function () {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data', new_color);
+          }
+
+          if ($main_panel.length != 0) {
+            $main_panel.attr('data', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data', new_color);
+          }
+        });
+
+        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+          var $btn = $(this);
+
+          if (sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            sidebar_mini_active = false;
+            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+          } else {
+            $('body').addClass('sidebar-mini');
+            sidebar_mini_active = true;
+            blackDashboard.showSidebarMessage('Sidebar mini activated...');
+          }
+
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function () {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function () {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+        });
+
+        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+          var $btn = $(this);
+
+          if (white_color == true) {
+
+            $('body').addClass('change-background');
+            setTimeout(function () {
+              $('body').removeClass('change-background');
+              $('body').removeClass('white-content');
+            }, 900);
+            white_color = false;
+          } else {
+
+            $('body').addClass('change-background');
+            setTimeout(function () {
+              $('body').removeClass('change-background');
+              $('body').addClass('white-content');
+            }, 900);
+
+            white_color = true;
+          }
+
+
+        });
+
+        $('.light-badge').click(function () {
+          $('body').addClass('white-content');
+        });
+
+        $('.dark-badge').click(function () {
+          $('body').removeClass('white-content');
+        });
+      });
+    });
+  </script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "black-dashboard-free"
+      });
+  </script>
+</body>
+
+</html>
+<?php
+
+include 'connection.php';
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['simpan'])){
+  $title = $_POST['title-f'];
+  $genre = $_POST['genre'];
+  $year = $_POST['tahun'];
+  $jenis = $_POST['jenisf'];
+  $desc = $_POST['ringkasan'];
+  $ngambar = uniqid() . "-" . $_FILES['gambarfilm']['name'];
+  $tgambar = $_FILES['gambarfilm']['tmp_name'];
+  $extensionget = strtolower(pathinfo($ngambar, PATHINFO_EXTENSION));
+  $aextension = ["jpg", "png", "jpeg"];
+
+  if(empty($title) || empty($year) || empty($jenis) || empty($desc) || empty($genre)){
+    echo "<script>alert('Harap isi semua data');</script>";
+  }elseif(!in_array($extensionget, $aextension)){
+echo "<script>alert('Hanya file ber ekstensi jpg,png,dan jpeg yang di izinkan');</script>";
+}else{
+  $direc = "fileimg/";
+  $vald = $direc . $ngambar;
+  if (move_uploaded_file($tgambar, $vald)){
+    $query = "INSERT INTO `tb_maindata`(`filmid`,`namafilm`,`genre`,`rilis`,`jenis`,`ringkasan`,`gambar`) VALUES (null,'$title', '$genre', '$year','$jenis', '$desc','$ngambar')";
+    if(mysqli_query($connect, $query)){
+      echo "<script>alert('Berhasil menyimpan data');</script>";
+    }
+  }else{
+    echo "<script>alert('Gagal mengirim data');</script>" . mysqli_error($connect);
+  }
+}
+
+}
+?>
